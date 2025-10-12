@@ -10,3 +10,5 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# digital-guidance-app
+Digital Guidance App is an AI-powered career guidance platform that helps students discover their ideal career paths through interest-based aptitude tests. It recommends personalized career options, provides details of top Indian colleges with admission info, and offers a roadmap with a progress tracker. Built with React, Vite, and Firebase.
