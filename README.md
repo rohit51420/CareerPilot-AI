@@ -32,7 +32,6 @@ The application provides personalized career recommendations, detailed career in
 * Vite
 * Firebase Authentication
 * Cloud Firestore
-* Gemini API
 * Tailwind CSS
 
 ### Purpose
