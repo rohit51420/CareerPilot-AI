@@ -10,5 +10,32 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# digital-guidance-app
-Digital Guidance App is an AI-powered career guidance platform that helps students discover their ideal career paths through interest-based aptitude tests. It recommends personalized career options, provides details of top Indian colleges with admission info, and offers a roadmap with a progress tracker. Built with React, Vite, and Firebase.
+# CareerPilot-AI
+
+CareerPilot AI is a career guidance platform designed to help students explore suitable career paths based on their interests, skills, and academic preferences.
+
+The application provides personalized career recommendations, detailed career insights, college discovery tools, and structured learning roadmaps to help students make informed decisions about their future. Users can create an account, save their progress, and access recommendations tailored to their profile.
+
+### Features
+
+* Personalized career recommendations
+* Career exploration and detailed insights
+* College discovery based on location and interests
+* Learning roadmaps for different career paths
+* Secure authentication with Firebase
+* Saved user preferences and progress tracking
+* Responsive design for desktop and mobile devices
+
+### Tech Stack
+
+* React
+* Vite
+* Firebase Authentication
+* Cloud Firestore
+* Gemini API
+* Tailwind CSS
+
+### Purpose
+
+This project was built to simplify career planning for students by bringing career guidance, college information, and learning resources together in a single platform.
+
