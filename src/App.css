@@ -1,42 +1,1247 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* ============================================================
+   CareerPilot AI — Professional Design System
+   Inspired by Apple.com refined minimalism
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap');
+
+/* ============================================================
+   CSS Variables — Light Mode (Default)
+   ============================================================ */
+
+:root {
+    /* Core Palette */
+    --bg-primary: #f5f5f7;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #fbfbfd;
+
+    /* Surfaces */
+    --surface-1: rgba(255, 255, 255, 0.90);
+    --surface-2: rgba(255, 255, 255, 0.70);
+    --surface-hover: rgba(0, 0, 0, 0.04);
+
+    /* Text */
+    --text-primary: #1d1d1f;
+    --text-secondary: #424245;
+    --text-tertiary: #6e6e73;
+    --text-placeholder: #aeaeb2;
+
+    /* Borders */
+    --border: rgba(0, 0, 0, 0.08);
+    --border-strong: rgba(0, 0, 0, 0.14);
+
+    /* Brand */
+    --blue: #0071e3;
+    --blue-hover: #0077ed;
+    --blue-light: #e8f1fb;
+    --blue-glow: rgba(0, 113, 227, 0.20);
+
+    --teal: #06b6d4;
+    --green: #30d158;
+    --red: #ff3b30;
+    --amber: #ff9f0a;
+
+    /* Nav */
+    --nav-bg: rgba(245, 245, 247, 0.85);
+    --nav-border: rgba(0, 0, 0, 0.10);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.06);
+
+    /* Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+    --radius-2xl: 32px;
+    --radius-pill: 999px;
+
+    /* Transitions */
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --dur-fast: 150ms;
+    --dur-normal: 250ms;
+    --dur-slow: 400ms;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* ============================================================
+   Dark Mode Variables
+   ============================================================ */
+
+.dark {
+    --bg-primary: #000000;
+    --bg-secondary: #1c1c1e;
+    --bg-tertiary: #2c2c2e;
+
+    --surface-1: rgba(28, 28, 30, 0.90);
+    --surface-2: rgba(44, 44, 46, 0.80);
+    --surface-hover: rgba(255, 255, 255, 0.06);
+
+    --text-primary: #f5f5f7;
+    --text-secondary: #a1a1a6;
+    --text-tertiary: #6e6e73;
+    --text-placeholder: #48484a;
+
+    --border: rgba(255, 255, 255, 0.10);
+    --border-strong: rgba(255, 255, 255, 0.16);
+
+    --blue: #2997ff;
+    --blue-hover: #3da2ff;
+    --blue-light: rgba(41, 151, 255, 0.12);
+    --blue-glow: rgba(41, 151, 255, 0.25);
+
+    --nav-bg: rgba(0, 0, 0, 0.75);
+    --nav-border: rgba(255, 255, 255, 0.08);
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.6);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* ============================================================
+   Reset & Base
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
-.card {
-  padding: 2em;
+body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    transition: background var(--dur-slow) var(--ease),
+        color var(--dur-slow) var(--ease);
+    min-height: 100vh;
 }
 
-.read-the-docs {
-  color: #888;
+/* ============================================================
+   Scrollbar
+   ============================================================ */
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-tertiary);
+}
+
+/* ============================================================
+   Background Orbs (Ambient Light)
+   ============================================================ */
+
+.blur-orb {
+    position: fixed;
+    border-radius: var(--radius-pill);
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.dark .blur-orb {
+    opacity: 1;
+}
+
+.orb-1 {
+    width: 600px;
+    height: 600px;
+    top: -150px;
+    left: -150px;
+    background: radial-gradient(circle, rgba(0, 113, 227, 0.18), transparent 70%);
+    animation: orb-drift-1 20s ease-in-out infinite;
+}
+
+.orb-2 {
+    width: 500px;
+    height: 500px;
+    bottom: -120px;
+    right: -120px;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.14), transparent 70%);
+    animation: orb-drift-2 25s ease-in-out infinite;
+}
+
+@keyframes orb-drift-1 {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(60px, 40px);
+    }
+}
+
+@keyframes orb-drift-2 {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(-40px, -60px);
+    }
+}
+
+/* ============================================================
+   Navigation
+   ============================================================ */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--nav-border);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    transition: background var(--dur-slow) var(--ease),
+        border-color var(--dur-slow) var(--ease);
+}
+
+header h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    letter-spacing: -0.3px;
+    transition: color var(--dur-normal) var(--ease);
+}
+
+/* Nav Items */
+nav button {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+    color: var(--text-secondary) !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 6px 12px !important;
+    cursor: pointer;
+    transition: color var(--dur-fast) var(--ease),
+        background var(--dur-fast) var(--ease) !important;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+nav button:hover {
+    color: var(--text-primary) !important;
+    background: var(--surface-hover) !important;
+}
+
+nav button.active-nav,
+nav button[class*="bg-blue-500"] {
+    color: var(--blue) !important;
+    background: var(--blue-light) !important;
+    box-shadow: none !important;
+}
+
+nav button svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   Main Layout
+   ============================================================ */
+
+main {
+    min-height: calc(100vh - 64px);
+}
+
+/* ============================================================
+   Hero Section
+   ============================================================ */
+
+section.text-center {
+    padding: 100px 24px 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+section.text-center::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% -10%,
+            rgba(0, 113, 227, 0.07),
+            transparent 70%);
+    pointer-events: none;
+}
+
+.dark section.text-center::before {
+    background: radial-gradient(ellipse 80% 60% at 50% -10%,
+            rgba(41, 151, 255, 0.12),
+            transparent 70%);
+}
+
+.text-blue-400 {
+    color: var(--blue) !important;
+    font-size: 0.8125rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.8px !important;
+    text-transform: uppercase !important;
+}
+
+.hero-title {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -2px;
+    color: var(--text-primary);
+    animation: hero-fade-up 0.8s var(--ease) both;
+    animation-delay: 0.1s;
+}
+
+.text-slate-400 {
+    color: var(--text-tertiary) !important;
+    font-size: 1.0625rem !important;
+    line-height: 1.7 !important;
+    font-weight: 400 !important;
+    animation: hero-fade-up 0.8s var(--ease) both;
+    animation-delay: 0.25s;
+}
+
+@keyframes hero-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================================
+   Premium Button
+   ============================================================ */
+
+.btn-premium {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--blue);
+    color: #ffffff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.1px;
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: 13px 28px;
+    cursor: pointer;
+    transition: background var(--dur-fast) var(--ease),
+        transform var(--dur-normal) var(--ease-spring),
+        box-shadow var(--dur-normal) var(--ease);
+    animation: hero-fade-up 0.8s var(--ease) both;
+    animation-delay: 0.4s;
+}
+
+.btn-premium:hover {
+    background: var(--blue-hover);
+    transform: scale(1.02) translateY(-1px);
+    box-shadow: 0 8px 24px var(--blue-glow);
+}
+
+.btn-premium:active {
+    transform: scale(0.98);
+}
+
+/* ============================================================
+   Glass Card / Surface
+   ============================================================ */
+
+.glass-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl) !important;
+    box-shadow: var(--shadow-md);
+    transition: background var(--dur-slow) var(--ease),
+        border-color var(--dur-slow) var(--ease),
+        box-shadow var(--dur-normal) var(--ease),
+        transform var(--dur-normal) var(--ease);
+}
+
+.dark .glass-card {
+    background: var(--surface-1);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+}
+
+.hover-lift:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
+/* Generic panel (bg-white/5 class) */
+[class*="bg-white/5"],
+[class*="backdrop-blur"] {
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-xl) !important;
+    box-shadow: var(--shadow-md) !important;
+    backdrop-filter: none !important;
+    transition: background var(--dur-slow) var(--ease),
+        border-color var(--dur-slow) var(--ease) !important;
+}
+
+.dark [class*="bg-white/5"],
+.dark [class*="backdrop-blur"] {
+    background: var(--surface-1) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+}
+
+/* ============================================================
+   Section Headings
+   ============================================================ */
+
+h2.text-2xl,
+h2[class*="font-bold"] {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.625rem !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.5px;
+    color: var(--text-primary) !important;
+    line-height: 1.2;
+}
+
+h3[class*="font-bold"],
+h3[class*="font-semibold"] {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+    letter-spacing: -0.2px;
+}
+
+/* ============================================================
+   Quiz Section
+   ============================================================ */
+
+.glass-card p[class*="font-semibold"] {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.1px;
+    line-height: 1.4;
+}
+
+/* Quiz Option Buttons */
+.glass-card button,
+[class*="rounded-2xl"][class*="border"] {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8125rem !important;
+    font-weight: 500 !important;
+    border-radius: var(--radius-pill) !important;
+    padding: 9px 18px !important;
+    border: 1px solid var(--border) !important;
+    background: var(--bg-primary) !important;
+    color: var(--text-secondary) !important;
+    cursor: pointer;
+    transition: all var(--dur-fast) var(--ease) !important;
+    white-space: nowrap;
+}
+
+.dark .glass-card button,
+.dark [class*="rounded-2xl"][class*="border"] {
+    background: rgba(255, 255, 255, 0.06) !important;
+    color: var(--text-secondary) !important;
+}
+
+.glass-card button:hover,
+[class*="rounded-2xl"][class*="border"]:hover {
+    background: var(--blue-light) !important;
+    color: var(--blue) !important;
+    border-color: rgba(0, 113, 227, 0.25) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+/* Selected state — bg-blue-500 */
+.glass-card button[class*="bg-blue-500"],
+[class*="bg-blue-500"][class*="rounded-2xl"] {
+    background: var(--blue) !important;
+    color: #ffffff !important;
+    border-color: var(--blue) !important;
+    box-shadow: 0 4px 12px var(--blue-glow) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* ============================================================
+   Recommendation Card
+   ============================================================ */
+
+.bg-blue-50,
+.dark\:bg-gray-700 {
+    background: var(--blue-light) !important;
+    border-radius: var(--radius-lg) !important;
+    border: 1px solid rgba(0, 113, 227, 0.12) !important;
+}
+
+.dark .bg-blue-50,
+.dark .dark\:bg-gray-700 {
+    background: rgba(41, 151, 255, 0.08) !important;
+    border-color: rgba(41, 151, 255, 0.16) !important;
+}
+
+h3[class*="text-blue"] {
+    font-family: 'DM Serif Display', Georgia, serif !important;
+    font-size: 1.375rem !important;
+    font-weight: 400 !important;
+    color: var(--blue) !important;
+    letter-spacing: -0.3px;
+}
+
+/* Career Tag Pills */
+.bg-blue-100,
+.dark\:bg-blue-900 {
+    background: rgba(0, 113, 227, 0.08) !important;
+    border: 1px solid rgba(0, 113, 227, 0.15) !important;
+    border-radius: var(--radius-pill) !important;
+}
+
+.dark .bg-blue-100 {
+    background: rgba(41, 151, 255, 0.12) !important;
+    border-color: rgba(41, 151, 255, 0.20) !important;
+}
+
+span[class*="text-blue-800"],
+span[class*="text-blue-200"] {
+    color: var(--blue) !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+}
+
+/* Explore button inside pill */
+button[class*="bg-blue-500"][class*="rounded-full"] {
+    background: var(--blue) !important;
+    color: #ffffff !important;
+    font-size: 0.6875rem !important;
+    font-weight: 600 !important;
+    padding: 3px 10px !important;
+    border-radius: var(--radius-pill) !important;
+    border: none !important;
+    transition: background var(--dur-fast) var(--ease),
+        transform var(--dur-fast) var(--ease-spring) !important;
+    box-shadow: none !important;
+}
+
+button[class*="bg-blue-500"][class*="rounded-full"]:hover {
+    background: var(--blue-hover) !important;
+    transform: scale(1.05) translateY(0) !important;
+}
+
+/* ============================================================
+   AI Deepen Button
+   ============================================================ */
+
+button[class*="from-purple-500"] {
+    background: linear-gradient(135deg, var(--blue), var(--teal)) !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 0.8125rem !important;
+    font-weight: 600 !important;
+    border-radius: var(--radius-pill) !important;
+    padding: 9px 20px !important;
+    border: none !important;
+    transition: opacity var(--dur-fast) var(--ease),
+        transform var(--dur-normal) var(--ease-spring),
+        box-shadow var(--dur-normal) var(--ease) !important;
+    box-shadow: none !important;
+}
+
+button[class*="from-purple-500"]:hover:not(:disabled) {
+    opacity: 0.88;
+    transform: scale(1.02) translateY(-1px) !important;
+    box-shadow: 0 6px 20px rgba(0, 113, 227, 0.30) !important;
+}
+
+button[class*="from-purple-500"]:disabled {
+    opacity: 0.4 !important;
+}
+
+/* ============================================================
+   Form Inputs & Selects
+   ============================================================ */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    background: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-strong) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 10px 14px !important;
+    outline: none;
+    transition: border-color var(--dur-fast) var(--ease),
+        box-shadow var(--dur-fast) var(--ease);
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.dark input[type="text"],
+.dark input[type="email"],
+.dark input[type="password"],
+.dark select,
+.dark textarea {
+    background: var(--bg-tertiary) !important;
+    border-color: var(--border-strong) !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--blue) !important;
+    box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.12) !important;
+}
+
+input::placeholder {
+    color: var(--text-placeholder);
+}
+
+/* Rounded top/bottom for login stacked inputs */
+input[class*="rounded-t-md"] {
+    border-radius: var(--radius-md) var(--radius-md) 0 0 !important;
+    border-bottom-width: 0.5px !important;
+}
+
+input[class*="rounded-b-md"] {
+    border-radius: 0 0 var(--radius-md) var(--radius-md) !important;
+    border-top-width: 0.5px !important;
+}
+
+/* ============================================================
+   Primary Buttons (Sign In, View Details, etc.)
+   ============================================================ */
+
+button[class*="bg-blue-600"],
+button[type="submit"][class*="bg-blue-"] {
+    background: var(--blue) !important;
+    color: #ffffff !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 0.9375rem !important;
+    font-weight: 600 !important;
+    border: none !important;
+    border-radius: var(--radius-md) !important;
+    padding: 11px 20px !important;
+    cursor: pointer;
+    transition: background var(--dur-fast) var(--ease),
+        transform var(--dur-normal) var(--ease-spring),
+        box-shadow var(--dur-normal) var(--ease) !important;
+    box-shadow: 0 2px 8px var(--blue-glow) !important;
+}
+
+button[class*="bg-blue-600"]:hover:not(:disabled),
+button[type="submit"][class*="bg-blue-"]:hover:not(:disabled) {
+    background: var(--blue-hover) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 20px var(--blue-glow) !important;
+}
+
+button[class*="bg-blue-600"]:disabled,
+button[type="submit"]:disabled {
+    opacity: 0.45 !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+}
+
+/* ============================================================
+   Danger / Destructive Buttons
+   ============================================================ */
+
+button[class*="bg-red-6"] {
+    background: var(--red) !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    border: none !important;
+    border-radius: var(--radius-md) !important;
+    transition: opacity var(--dur-fast) var(--ease),
+        transform var(--dur-normal) var(--ease-spring) !important;
+}
+
+button[class*="bg-red-6"]:hover {
+    opacity: 0.88;
+    transform: translateY(-1px) !important;
+}
+
+/* ============================================================
+   Neutral / Secondary Buttons
+   ============================================================ */
+
+button[class*="bg-gray-6"],
+button[class*="bg-gray-2"] {
+    background: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    font-weight: 500 !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-md) !important;
+    transition: background var(--dur-fast) var(--ease) !important;
+}
+
+button[class*="bg-gray-6"]:hover,
+button[class*="bg-gray-2"]:hover {
+    background: var(--surface-hover) !important;
+    transform: none !important;
+}
+
+/* ============================================================
+   Login Page
+   ============================================================ */
+
+.min-h-screen.flex.items-center {
+    background: var(--bg-primary) !important;
+}
+
+.min-h-screen.flex.items-center>div {
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-2xl) !important;
+    box-shadow: var(--shadow-xl) !important;
+    backdrop-filter: none !important;
+}
+
+.dark .min-h-screen.flex.items-center>div {
+    background: var(--surface-1) !important;
+    backdrop-filter: blur(32px) !important;
+    -webkit-backdrop-filter: blur(32px) !important;
+}
+
+/* Login heading */
+.min-h-screen.flex.items-center h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 2.25rem !important;
+    font-weight: 400 !important;
+    letter-spacing: -1px;
+    color: var(--text-primary) !important;
+}
+
+/* Auth toggle link */
+button[class*="text-blue-6"],
+button[class*="text-blue-4"] {
+    color: var(--blue) !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity var(--dur-fast) var(--ease) !important;
+}
+
+button[class*="text-blue-6"]:hover,
+button[class*="text-blue-4"]:hover {
+    opacity: 0.72;
+    transform: none !important;
+}
+
+/* Guest button */
+button[class*="text-gray-6"] {
+    color: var(--text-secondary) !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    cursor: pointer;
+    transition: color var(--dur-fast) var(--ease) !important;
+}
+
+button[class*="text-gray-6"]:hover {
+    color: var(--text-primary) !important;
+    transform: none !important;
+}
+
+/* ============================================================
+   Colleges Directory
+   ============================================================ */
+
+/* College Card */
+.bg-gray-50,
+.dark\:bg-gray-700 {
+    background: var(--bg-primary) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-lg) !important;
+    transition: all var(--dur-normal) var(--ease) !important;
+}
+
+.dark .bg-gray-50 {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.bg-gray-50:hover {
+    box-shadow: var(--shadow-md) !important;
+    transform: translateY(-2px);
+}
+
+/* View Details button */
+.bg-gray-50 button,
+[class*="bg-gray-50"] button {
+    background: var(--blue) !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    border-radius: var(--radius-md) !important;
+    font-size: 0.875rem !important;
+    padding: 10px 16px !important;
+    border: none !important;
+    transition: background var(--dur-fast) var(--ease),
+        transform var(--dur-normal) var(--ease-spring) !important;
+    box-shadow: none !important;
+}
+
+.bg-gray-50 button:hover {
+    background: var(--blue-hover) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* College list items */
+.bg-gray-50 ul li,
+.bg-gray-50 p {
+    color: var(--text-tertiary) !important;
+    font-size: 0.8125rem !important;
+}
+
+.bg-gray-50 h3 {
+    color: var(--text-primary) !important;
+    font-size: 0.9375rem !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.2px;
+}
+
+/* ============================================================
+   Modal
+   ============================================================ */
+
+.fixed.inset-0 {
+    background: rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.fixed.inset-0>div {
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-2xl) !important;
+    box-shadow: var(--shadow-xl) !important;
+    backdrop-filter: none !important;
+    animation: modal-in 0.3s var(--ease-spring) both;
+}
+
+.dark .fixed.inset-0>div {
+    background: #1c1c1e !important;
+}
+
+@keyframes modal-in {
+    from {
+        opacity: 0;
+        transform: scale(0.94) translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Modal title */
+.fixed.inset-0 h3 {
+    font-family: 'DM Serif Display', Georgia, serif !important;
+    font-size: 1.375rem !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.3px;
+    color: var(--text-primary) !important;
+}
+
+/* Modal close button */
+.fixed.inset-0 button[class*="rounded-full"] {
+    background: var(--bg-primary) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text-secondary) !important;
+    border-radius: var(--radius-pill) !important;
+    padding: 6px !important;
+    width: 32px !important;
+    height: 32px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--dur-fast) var(--ease),
+        color var(--dur-fast) var(--ease) !important;
+    box-shadow: none !important;
+}
+
+.fixed.inset-0 button[class*="rounded-full"]:hover {
+    background: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    transform: none !important;
+}
+
+/* ============================================================
+   College Details Modal
+   ============================================================ */
+
+/* Program cards inside modal */
+.dark\:bg-gray-700 {
+    background: var(--bg-primary) !important;
+    border-radius: var(--radius-md) !important;
+    border: 1px solid var(--border) !important;
+    padding: 12px !important;
+}
+
+.dark .dark\:bg-gray-700 {
+    background: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Table in modal */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+thead tr {
+    background: var(--bg-tertiary) !important;
+}
+
+.dark thead tr {
+    background: rgba(255, 255, 255, 0.06) !important;
+}
+
+th,
+td {
+    padding: 10px 14px !important;
+    font-size: 0.8125rem !important;
+    color: var(--text-primary) !important;
+    border-bottom: 1px solid var(--border) !important;
+}
+
+th {
+    font-weight: 600 !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    color: var(--text-tertiary) !important;
+}
+
+/* Facility tags */
+.bg-green-100,
+.dark\:bg-green-900 {
+    background: rgba(48, 209, 88, 0.10) !important;
+    border: 1px solid rgba(48, 209, 88, 0.20) !important;
+    border-radius: var(--radius-pill) !important;
+    color: #1a7a32 !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    padding: 4px 12px !important;
+}
+
+.dark .bg-green-100 {
+    background: rgba(48, 209, 88, 0.12) !important;
+    color: #30d158 !important;
+}
+
+/* ============================================================
+   Resources / Roadmap Page
+   ============================================================ */
+
+/* Timeline */
+.relative.border-l-2 {
+    border-color: var(--border-strong) !important;
+    margin-left: 20px !important;
+}
+
+/* Timeline dot */
+.absolute.flex.items-center.justify-center.w-8 {
+    background: var(--bg-secondary) !important;
+    border: 2px solid var(--blue) !important;
+    width: 28px !important;
+    height: 28px !important;
+    left: -14px !important;
+    box-shadow: 0 0 0 4px var(--bg-secondary) !important;
+}
+
+.dark .absolute.flex.items-center.justify-center.w-8 {
+    background: var(--bg-secondary) !important;
+    box-shadow: 0 0 0 4px var(--bg-secondary) !important;
+}
+
+.absolute.flex.items-center.justify-center.w-8 svg {
+    color: var(--blue) !important;
+    width: 14px !important;
+    height: 14px !important;
+}
+
+/* Timeline year label */
+.mb-8 h3 {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+    letter-spacing: -0.2px;
+    margin-bottom: 6px !important;
+}
+
+/* Timeline task list */
+.mb-8 ul li {
+    font-size: 0.875rem !important;
+    color: var(--text-secondary) !important;
+    line-height: 1.6 !important;
+}
+
+/* Course cards */
+.space-y-4>div {
+    background: var(--bg-primary) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: 16px !important;
+    transition: box-shadow var(--dur-fast) var(--ease) !important;
+}
+
+.dark .space-y-4>div {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.space-y-4>div:hover {
+    box-shadow: var(--shadow-sm) !important;
+}
+
+/* Career path tags */
+.bg-gray-200,
+.dark\:bg-gray-600 {
+    background: var(--bg-tertiary) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-pill) !important;
+    color: var(--text-secondary) !important;
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+    padding: 4px 12px !important;
+}
+
+.dark .bg-gray-200 {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: var(--text-secondary) !important;
+}
+
+/* ============================================================
+   Settings Page
+   ============================================================ */
+
+/* Dark mode toggle */
+button[class*="relative inline-flex"] {
+    background: var(--border-strong) !important;
+    border-radius: var(--radius-pill) !important;
+    border: none !important;
+    padding: 0 !important;
+    width: 44px !important;
+    height: 24px !important;
+    transition: background var(--dur-normal) var(--ease) !important;
+    cursor: pointer !important;
+    box-shadow: none !important;
+}
+
+button.bg-blue-600[class*="relative inline-flex"] {
+    background: var(--blue) !important;
+}
+
+button[class*="relative inline-flex"] span {
+    width: 18px !important;
+    height: 18px !important;
+    top: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    transition: transform var(--dur-normal) var(--ease-spring) !important;
+}
+
+/* Account section divider */
+.border-t {
+    border-color: var(--border) !important;
+}
+
+/* Account text */
+.text-sm.text-gray-500 {
+    color: var(--text-tertiary) !important;
+    font-size: 0.875rem !important;
+}
+
+/* ============================================================
+   Spinner
+   ============================================================ */
+
+.animate-spin {
+    animation: spin 0.8s linear infinite !important;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.rounded-full.border-b-2.border-blue-500 {
+    border-color: var(--blue) !important;
+    border-top-color: transparent !important;
+    border-left-color: transparent !important;
+    border-right-color: transparent !important;
+    border-width: 2px !important;
+    width: 24px !important;
+    height: 24px !important;
+}
+
+/* ============================================================
+   Text & Muted Utilities
+   ============================================================ */
+
+.text-gray-600,
+.dark\:text-gray-300,
+.dark\:text-gray-400 {
+    color: var(--text-secondary) !important;
+}
+
+.text-gray-500,
+.dark\:text-gray-400 {
+    color: var(--text-tertiary) !important;
+}
+
+.text-gray-700,
+.dark\:text-gray-300 {
+    color: var(--text-primary) !important;
+}
+
+.text-red-500 {
+    color: var(--red) !important;
+    font-size: 0.875rem !important;
+}
+
+/* Error / Alert box */
+.bg-red-100 {
+    background: rgba(255, 59, 48, 0.08) !important;
+    border-color: rgba(255, 59, 48, 0.30) !important;
+    border-radius: var(--radius-md) !important;
+    color: var(--red) !important;
+}
+
+/* Separator */
+.flex-grow.border-t {
+    border-color: var(--border) !important;
+}
+
+.flex-shrink.mx-4 {
+    color: var(--text-tertiary) !important;
+    font-size: 0.8125rem !important;
+}
+
+/* ============================================================
+   Page Container Spacing
+   ============================================================ */
+
+.p-4.md\:p-8 {
+    padding: clamp(20px, 4vw, 48px) !important;
+}
+
+/* Cards grid gap */
+.gap-6 {
+    gap: 24px !important;
+}
+
+.gap-8 {
+    gap: 32px !important;
+}
+
+.gap-4 {
+    gap: 16px !important;
+}
+
+/* ============================================================
+   Dark-mode body background
+   ============================================================ */
+
+.dark body,
+.dark>div>div {
+    background: var(--bg-primary);
+}
+
+/* ============================================================
+   Responsive: Mobile Nav Labels
+   ============================================================ */
+
+@media (max-width: 640px) {
+    nav button {
+        padding: 8px !important;
+        border-radius: var(--radius-md) !important;
+    }
+
+    .hero-title {
+        letter-spacing: -1.5px;
+    }
+
+    .btn-premium {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+    }
+}
+
+/* ============================================================
+   Subtle page-load animation
+   ============================================================ */
+
+main>div {
+    animation: page-in 0.4s var(--ease) both;
+}
+
+@keyframes page-in {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

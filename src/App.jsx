@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo, createContext, useContext } from 'react';
 import { initializeApp } from 'firebase/app';
+import './App.css'
 import { 
     getAuth, 
     onAuthStateChanged, 
@@ -12,16 +13,11 @@ import {
     getFirestore, 
     doc, 
     setDoc, 
-    getDoc,
-    collection,
-    writeBatch,
-    getDocs,
-    query,
-    where
+    getDoc
 } from 'firebase/firestore';
 
 // --- Firebase Configuration ---
-// Yahaan apna Firebase project configuration daalein.
+
 const firebaseConfig = {
   apiKey: "AIzaSyDbUZPRoYKIo2yEB4x0pRbQm-Mrq_i9Rp4",
   authDomain: "career-council-caf43.firebaseapp.com",
@@ -31,10 +27,10 @@ const firebaseConfig = {
   appId: "1:1021230419673:web:1c1674f97a46ada8def8c8"
 };
 
-// --- (IMPORTANT) Yahaan apni Gemini API Key paste kar ---
-const GEMINI_API_KEY = "AIzaSyDFuGjDYvXlM8-FWPeu5sZsHLSFOBD2L30";
 
-// --- Firebase ko Shuru Karein ---
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+
+// --- Firebase
 const isConfigured = firebaseConfig.apiKey && firebaseConfig.apiKey !== "PASTE_YOUR_FIREBASE_API_KEY_HERE";
 let app, auth, db;
 if (isConfigured) {
@@ -58,9 +54,9 @@ const Modal = ({ show, onClose, title, children }) => {
     if (!show) return null;
     return (
         <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex justify-center items-center p-4">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-2xl p-6">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-lg shadow-xl w-full max-w-2xl p-6">
                 <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-white">{title}</h3>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white">{title}</h3>
                     {/* FIX: Replaced the simple text 'x' with a more visible, styled SVG icon button */}
                     <button 
                         onClick={onClose} 
@@ -78,7 +74,7 @@ const Modal = ({ show, onClose, title, children }) => {
 
 // --- Database Seeding Data and Logic ---
 const indianStatesAndUTs = [
-  "All", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Delhi", "Jammu & Kashmir", "Ladakh", "Lakshadweep", "Puducherry"
+  "India", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Delhi", "Jammu & Kashmir", "Ladakh", "Lakshadweep", "Puducherry"
 ];
 
 // --- Recommendation Engine ---
@@ -221,9 +217,9 @@ function LoginPage() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
-            <div className="w-full max-w-md p-8 space-y-8 bg-white dark:bg-gray-800 rounded-2xl shadow-lg">
+            <div className="w-full max-w-md p-8 space-y-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-lg">
                 <div className="text-center">
-                    <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Digital Guidance</h1>
+                    <h1 className="text-4xl font-bold text-gray-900 dark:text-white">CareerPilot AI</h1>
                     <p className="mt-2 text-gray-600 dark:text-gray-300">Your personalized career advisor.</p>
                 </div>
 
@@ -365,7 +361,7 @@ function HomePage() {
         Structure: { "stream": "${initialStream}", "careers": ["string", "string", ...], "reason": "string" }`;
 
         try {
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${GEMINI_API_KEY}`;
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
 
             const response = await fetch(apiUrl, {
                 method: 'POST',
@@ -418,7 +414,7 @@ function HomePage() {
         Keep the language simple and inspiring.`;
 
         try {
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${GEMINI_API_KEY}`;
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
 
             const response = await fetch(apiUrl, {
                 method: 'POST',
@@ -444,7 +440,39 @@ function HomePage() {
 
     return (
         <div className="p-4 md:p-8 space-y-8">
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
+            <section className="text-center py-24">
+  <p className="text-blue-400 font-semibold mb-4">
+    AI Powered Career Discovery
+  </p>
+
+  <h1 className="hero-title">
+    Discover Your
+    <br />
+    Future Career
+  </h1>
+
+  <p className="max-w-2xl mx-auto mt-6 text-slate-400 text-lg">
+    Personalized career recommendations,
+    college guidance and learning roadmaps
+    powered by AI.
+  </p>
+
+  <div className="mt-10">
+                    <button className="btn-premium"
+                          className="btn-premium"
+  onClick={() => {
+    document
+      .getElementById("assessment")
+      ?.scrollIntoView({
+        behavior: "smooth"
+      });
+  }}
+>
+      Start Assessment
+    </button>
+  </div>
+</section>
+            <div id="assessment" className="glass-card hover-lift p-6">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Aptitude & Interest Assessment</h2>
                 <div className="space-y-6">
                     {quizQuestions.map(q => (
@@ -455,7 +483,11 @@ function HomePage() {
                                     <button
                                         key={option}
                                         onClick={() => handleAnswerChange(q.id, option)}
-                                        className={`px-4 py-2 text-sm rounded-full transition-colors duration-200 ${quizAnswers[q.id] === option ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-blue-200 dark:hover:bg-gray-600'}`}
+                                        className={`px-5 py-3 text-sm rounded-2xl border transition-all duration-300 hover:scale-105 ${
+  quizAnswers[q.id] === option
+    ? 'bg-blue-500 text-white border-blue-300 shadow-lg shadow-blue-500/30'
+    : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10 hover:border-blue-400/30'
+}`}
                                     >
                                         {option}
                                     </button>
@@ -466,7 +498,7 @@ function HomePage() {
                 </div>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl shadow-lg">
                 <div className="flex flex-wrap justify-between items-center gap-4 mb-4">
                     <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Personalized Recommendations</h2>
                     <button
@@ -541,11 +573,17 @@ function CollegesDirectory() {
         }
 
         try {
-            const prompt = `List the top 15-20 government/publicly-funded engineering, medical, arts, and business colleges in the state of "${state}", India. 
-            Important: Respond ONLY with a valid JSON array. Each object in the array should have this exact structure:
-            {"id": "A unique short code for the college", "name": "Full College Name", "location": "${state}", "programs": ["Key Program 1", "Key Program 2"], "stream": ["Engineering & Tech", "Medical", etc.]}`;
+            const prompt = state === "India"
+? `List the top 30 colleges across India including engineering, medical, arts, business and technology institutes.
+
+Important: Respond ONLY with a valid JSON array. Each object in the array should have this exact structure:
+{"id": "A unique short code for the college", "name": "Full College Name", "location": "State Name", "programs": ["Key Program 1", "Key Program 2"], "stream": ["Engineering & Tech", "Medical", etc.]}`
+: `List the top 15-20 government/publicly-funded engineering, medical, arts, and business colleges in the state of "${state}", India.
+
+Important: Respond ONLY with a valid JSON array. Each object in the array should have this exact structure:
+{"id": "A unique short code for the college", "name": "Full College Name", "location": "${state}", "programs": ["Key Program 1", "Key Program 2"], "stream": ["Engineering & Tech", "Medical", etc.]}`;
             
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${GEMINI_API_KEY}`;
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -570,13 +608,10 @@ function CollegesDirectory() {
     }, []);
 
     useEffect(() => {
-        if (userProfile.location && userProfile.location !== 'All') {
-            fetchCollegesByState(userProfile.location);
-        } else {
-            setColleges([]);
-            setLoading(false);
-        }
-    }, [userProfile.location, fetchCollegesByState]);
+    fetchCollegesByState(
+        userProfile.location || 'India'
+    );
+}, [userProfile.location, fetchCollegesByState]);
     
     const fetchCollegeDetails = async (college) => {
         setSelectedCollege(college);
@@ -610,7 +645,7 @@ function CollegesDirectory() {
             }
             Generate realistic but sample data if exact numbers are not available. The structure must be followed.`;
 
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${GEMINI_API_KEY}`;
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -642,7 +677,7 @@ function CollegesDirectory() {
 
     return (
         <div className="p-4 md:p-8 space-y-8">
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl shadow-lg">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Government Colleges Directory</h2>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -795,7 +830,7 @@ function ResourcesPage() {
               ]
             }`;
 
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${GEMINI_API_KEY}`;
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -834,7 +869,7 @@ function ResourcesPage() {
 
     return (
         <div className="p-4 md:p-8">
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg mb-8">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl shadow-lg mb-8">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Personalized Career Roadmap</h2>
                 <p className="text-gray-600 dark:text-gray-400 mb-4">Select one of your recommended career paths to see a detailed roadmap.</p>
                 <div className="flex gap-4 items-center">
@@ -854,7 +889,7 @@ function ResourcesPage() {
             : personalizedResources && (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     {/* Timeline Tracker */}
-                    <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
+                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl shadow-lg">
                         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Timeline Tracker for {selectedCareer}</h2>
                         <div className="relative border-l-2 border-blue-200 dark:border-blue-700 ml-4">
                             {personalizedResources.timeline.map((item, index) => (
@@ -872,7 +907,7 @@ function ResourcesPage() {
                     </div>
 
                     {/* Course-to-Career Path Mapping */}
-                    <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
+                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl shadow-lg">
                          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Course-to-Career Path for {selectedCareer}</h2>
                          <div className="space-y-4">
                              {personalizedResources.careerMap.map((item, index) => (
@@ -919,7 +954,7 @@ function SettingsPage() {
 
     return (
         <div className="p-4 md:p-8">
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg max-w-2xl mx-auto">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl shadow-lg max-w-2xl mx-auto">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Settings</h2>
                 
                 <div className="space-y-6">
@@ -982,8 +1017,8 @@ function MainApp() {
             onClick={() => setActivePage(pageName)}
             className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                 activePage === pageName 
-                ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200' 
-                : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                ? 'bg-blue-500/20 text-blue-300 border border-blue-400/20 shadow-lg shadow-blue-500/10'
+    : 'text-gray-300 hover:bg-white/5 hover:text-white'
             }`}
         >
             {icon}
@@ -993,12 +1028,20 @@ function MainApp() {
 
     return (
         <div className={`${userProfile.darkMode ? 'dark' : ''}`}>
-             <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
-                <header className="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-10">
+            <div className="
+min-h-screen
+bg-white
+dark:bg-slate-950
+transition-colors
+duration-300
+">
+                <div className="blur-orb orb-1"></div>
+<div className="blur-orb orb-2"></div>
+                <header className="sticky top-0 z-50 border-b border-white/10 bg-black/20 backdrop-blur-xl">
                     <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="flex items-center justify-between h-16">
                             <div className="flex-shrink-0">
-                                <h1 className="text-xl font-bold">Digital Guidance</h1>
+                                <h1 className="text-xl font-bold">CareerPilot AI</h1>
                             </div>
                             <div className="flex items-center space-x-2 sm:space-x-4">
                                <NavItem pageName="Home" icon={<IconHome />}>Home</NavItem>
@@ -1025,7 +1068,7 @@ export default function App() {
     const [loading, setLoading] = useState(true);
     const [userProfile, setUserProfile] = useState({
         darkMode: false,
-        location: 'All',
+        location: 'India',
         quizAnswers: {}
     });
 
